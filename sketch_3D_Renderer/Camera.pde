@@ -8,7 +8,7 @@ class Camera {
   Camera(float xPosition, float yPosition, float zPosition, float FocalLength, Layer[] Layers) {
     xPos = xPosition;
     yPos = yPosition;
-    zPos = zPosition;
+    zPos = zPosition + FocalLength;
     focalLength = FocalLength;
     for (Layer L : Layers) {
       layers.add(L);
@@ -16,15 +16,15 @@ class Camera {
   }
 
   void Run() {
-    DrawObject(false, false);
+    DrawObject(false, true);
     
-    /*for(Mesh M : layers.get(0).meshes){
+    for(Mesh M : layers.get(0).meshes){
       for(int i = 0; i < layers.get(0).meshes.get(0).verts.size(); ++i){
-        M.verts.get(i).x += random(-0.1, 0.1);
-        M.verts.get(i).y += random(-0.1, 0.1);
-        M.verts.get(i).z += random(-0.1, 0.1);
+        M.verts.get(i).x += random(-0.001, 0.001);
+        M.verts.get(i).y += random(-0.001, 0.001);
+        M.verts.get(i).z += random(-0.001, 0.001);
       }
-    }*/
+    }
   }
 
   void DrawObject(boolean drawVerts, boolean markPoints) {
@@ -62,9 +62,9 @@ class Camera {
             if (markPoints) {
               fill(255, 0, 0);
               text(
-                nf(currentMesh.x + currentMesh.verts.get(i).x, 0, 2) + ", " + 
-                nf(currentMesh.y + currentMesh.verts.get(i).y, 0, 2) + ", " + 
-                nf(currentMesh.z + currentMesh.verts.get(i).z, 0, 2),
+                nf(currentMesh.x + currentMesh.verts.get(i).x, 0, 0) + ", " + 
+                nf(currentMesh.y + currentMesh.verts.get(i).y, 0, 0) + ", " + 
+                nf(currentMesh.z + currentMesh.verts.get(i).z, 0, 0),
                 currentMesh.projectedVerts.get(i).x + width/2, 
                 currentMesh.projectedVerts.get(i).y + height/2
                 );
@@ -80,7 +80,7 @@ class Camera {
 
           //Check if verts have been projected i.e. between clipping planes
           if (currentMesh.projectedVerts.get(currentEdge.vert1) != null && currentMesh.projectedVerts.get(currentEdge.vert2) != null) {
-            stroke(255);
+            stroke(currentEdge.edgeColour);
             line(
               currentMesh.projectedVerts.get(currentEdge.vert1).x + width/2, 
               currentMesh.projectedVerts.get(currentEdge.vert1).y + height/2, 

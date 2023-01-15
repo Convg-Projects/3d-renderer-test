@@ -1,13 +1,13 @@
 class Cube {
   Vertex[] pointArray = {
   new Vertex(-1, -1, -1), 
-  new Vertex(-1, -1,  0), 
+  new Vertex(-1, -1,  1), 
   new Vertex(-1,  1, -1), 
-  new Vertex(-1,  1,  0), 
+  new Vertex(-1,  1,  1), 
   new Vertex( 1, -1, -1), 
-  new Vertex( 1, -1,  0), 
+  new Vertex( 1, -1,  1), 
   new Vertex( 1,  1, -1), 
-  new Vertex( 1,  1,  0)
+  new Vertex( 1,  1,  1)
   };
   
   Edge[] edgeArray = {
